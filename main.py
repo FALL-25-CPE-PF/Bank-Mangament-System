@@ -20,6 +20,8 @@ def transfer_money(accounts, sender):
     Account.save_accounts(accounts)
     print("Transfer successful.")
 
+
+
 def admin_menu(admin):
     while True:
         print("\nADMIN MENU")
@@ -42,3 +44,51 @@ def admin_menu(admin):
             admin.total_balance()
         elif ch == "8":
             break
+
+def main():
+    accounts = Account.load_accounts()
+    admin = BankAdmin(accounts)
+
+    while True:
+        print("\nBANK ACCOUNT MANAGEMENT SYSTEM")
+        print("1.User Login")
+        print("2.Admin Login")
+        print("3.Exit")
+
+        choice = input("Enter choice: ")
+
+        if choice == "1":
+            acc = Account.user_login(accounts)
+            if acc:
+                while True:
+                    print("\n1.Deposit 2.Withdraw 3.Transfer 4.Balance 5.History 6.Logout")
+                    op = input("Option: ")
+
+                    if op == "1":
+                        acc.deposit(float(input("Amount: ")))
+                        Account.save_accounts(accounts)
+                    elif op == "2":
+                        acc.withdraw(float(input("Amount: ")))
+                        Account.save_accounts(accounts)
+                    elif op == "3":
+                        transfer_money(accounts, acc)
+                    elif op == "4":
+                        print("Balance:", acc.balance)
+                    elif op == "5":
+                        acc.show_history()
+                    elif op == "6":
+                        break
+
+        elif choice == "2":
+            if admin.admin_login():
+                admin_menu(admin)
+            else:
+                print("Admin login failed.")
+
+        elif choice == "3":
+            print("Program closed.")
+            break
+
+
+if __name__ == "__main__":
+    main()
