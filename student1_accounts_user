@@ -1,0 +1,19 @@
+import os
+
+DATA_FILE = "accounts.txt"
+
+def load_accounts():
+    accounts = {}
+    if not os.path.exists(DATA_FILE):
+        return accounts
+    with open(DATA_FILE, "r") as file:
+        for line in file:
+            acc_no, name, pin, balance, history, blocked = line.strip().split("|")
+            accounts[acc_no] = {
+                "name": name,
+                "pin": pin,
+                "balance": float(balance),
+                "history": history.split(";") if history else [],
+                "blocked": blocked == "True"
+            }
+    return accounts
