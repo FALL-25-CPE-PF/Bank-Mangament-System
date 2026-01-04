@@ -1,0 +1,22 @@
+def user_login(accounts):
+    acc_no = input("Enter Account Number: ")
+    if acc_no not in accounts:
+        print("Account does not exist.")
+        return None
+    if accounts[acc_no]["blocked"]:
+        print("Account is blocked. Contact admin.")
+        return None
+
+    attempts = 0
+    while attempts < 2:
+        pin = input("Enter PIN: ")
+        if pin == accounts[acc_no]["pin"]:
+            print("Login successful.")
+            return acc_no
+        attempts += 1
+        print("Wrong PIN.")
+
+    accounts[acc_no]["blocked"] = True
+    save_accounts(accounts)
+    print("Account blocked due to multiple failed login attempts.")
+    return None
