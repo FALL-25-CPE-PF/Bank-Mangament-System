@@ -17,3 +17,11 @@ def load_accounts():
                 "blocked": blocked == "True"
             }
     return accounts
+    
+def save_accounts(accounts):
+    with open(DATA_FILE, "w") as file:
+        for acc_no, data in accounts.items():
+            history = ";".join(data["history"])
+            file.write(
+                f"{acc_no}|{data['name']}|{data['pin']}|{data['balance']}|{history}|{data['blocked']}\n"
+            )
