@@ -20,3 +20,28 @@ def user_login(accounts):
     save_accounts(accounts)
     print("Account blocked due to multiple failed login attempts.")
     return None
+def transfer_money(accounts, sender_acc):
+    receiver_acc = input("Enter receiver account number: ")
+    if receiver_acc not in accounts:
+        print("Receiver account does not exist.")
+        return
+    if receiver_acc == sender_acc:
+        print("Cannot transfer to your own account.")
+        return
+
+    amount = float(input("Enter transfer amount: "))
+    if amount <= 0:
+        print("Invalid amount.")
+        return
+    if amount > accounts[sender_acc]["balance"]:
+        print("Insufficient balance.")
+        return
+
+    accounts[sender_acc]["balance"] -= amount
+    accounts[receiver_acc]["balance"] += amount
+    accounts[sender_acc]["history"].append(f"Transferred {amount} to {receiver_acc}")
+    accounts[receiver_acc]["history"].append(f"Received {amount} from {sender_acc}")
+    save_accounts(accounts)
+    print("Transfer successful.")
+
+    
