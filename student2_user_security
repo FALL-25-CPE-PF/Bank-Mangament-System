@@ -46,4 +46,12 @@ def transfer_money(accounts, sender_acc):
 
 def check_balance(accounts, acc_no):
     print("Current Balance:", accounts[acc_no]["balance"])
+def view_history(accounts, acc_no):
+    print("Transaction History:")
+    if not accounts[acc_no]["history"]:
+        print("No transactions.")
+    else:
+        for h in accounts[acc_no]["history"]:
+            print(h)
+
     
