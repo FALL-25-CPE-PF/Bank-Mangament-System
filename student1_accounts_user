@@ -29,3 +29,15 @@ def save_accounts(accounts):
 def generate_account_number(accounts):
     base = 10000
     return str(base + len(accounts) + 1)
+
+# User operations – Deposit & Withdraw
+def deposit(accounts, acc_no):
+    amount = float(input("Enter amount to deposit: "))
+    if amount <= 0:
+        print("Invalid amount.")
+        return
+    accounts[acc_no]["balance"] += amount
+    accounts[acc_no]["history"].append(f"Deposited {amount}")
+    save_accounts(accounts)
+    print("Deposit successful.")
+
