@@ -44,4 +44,6 @@ def transfer_money(accounts, sender_acc):
     save_accounts(accounts)
     print("Transfer successful.")
 
+def check_balance(accounts, acc_no):
+    print("Current Balance:", accounts[acc_no]["balance"])
     
