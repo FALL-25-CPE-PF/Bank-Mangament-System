@@ -26,4 +26,6 @@ def save_accounts(accounts):
                 f"{acc_no}|{data['name']}|{data['pin']}|{data['balance']}|{history}|{data['blocked']}\n"
             )
 
-
+def generate_account_number(accounts):
+    base = 10000
+    return str(base + len(accounts) + 1)
