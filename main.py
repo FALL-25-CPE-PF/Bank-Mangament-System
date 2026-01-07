@@ -38,3 +38,16 @@ def main():
                         view_history(accounts, acc_no)
                     elif opt == "6":
                         break
+        elif choice == "2":
+            if admin_login():
+                admin_menu(accounts)
+            else:
+                print("Admin login failed.")
+
+        elif choice == "3":
+            print("Program closed.")
+            break
+
+
+if __name__ == "__main__":
+    main()
